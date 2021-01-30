@@ -10,5 +10,3 @@ end
 if player.Name=='oddysas' then passw='oddson' 
 end
 
-if player.Name=='Chronicxsploits_5' then passw='poggers' 
-end
