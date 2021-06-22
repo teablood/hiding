@@ -90,6 +90,7 @@ end
 --_G.depthposition = 0
 --_G.widthposition = 0
 
+Base= Base * CFrame.new(_G.depthposition,_G.heightposition,_G.widthposition)
 
 if _G.gap == true then
 
@@ -103,9 +104,6 @@ if _G.gap == true then
 					
 end 
 end
-
-Base= Base * CFrame.new(_G.depthposition,_G.heightposition,_G.widthposition)
-
 local Sbp  
 Sbp = function(A_1, A_2, A_3, A_4, A_5, A_6, A_7)
 if _G.PreViewa == false then 
