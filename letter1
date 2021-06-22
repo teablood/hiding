@@ -135,3 +135,6 @@ Start()
 wait(2)
     PreView:Destroy()
     BP:Destroy()
+Check = false
+send("Your Build has Finished",2)
+end
