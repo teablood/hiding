@@ -1,6 +1,6 @@
 local Player = _G.Base2
+if _G.gap == true then
 
-if _G.gap then
                 	currentlettersize = 7
                   	if _G.cursorprint + Gap + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
                  	else
