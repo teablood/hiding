@@ -91,19 +91,7 @@ end
 Base= Base * CFrame.new(_G.depthposition,_G.heightposition,_G.widthposition)
 local currentlettersize = 0
 local startergap = 0
-local Gap = 0
-if _G.gap == true then
 
-                	currentlettersize = 7
-                  	if _G.widthposition + Gap + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
-                 	else
-	         	
-	        	_G.widthposition = _G.widthposition + startergap
-	            	startergap = 8.5
-					
-					
-end 
-end
 local Sbp  
 Sbp = function(A_1, A_2, A_3, A_4, A_5, A_6, A_7)
 if _G.PreViewa == false then 
@@ -112,11 +100,26 @@ if _G.PreViewa == false then
  ["CFrame"] = Base * CFrame.Angles(A_2, A_3, A_4) + Vector3.new(A_5, A_6, A_7)
    }
 else
+if _G.gap == true then
+
+                	currentlettersize = 7
+                  	if _G.widthposition + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
+                 	else
+	         	
+	        	_G.widthposition = _G.widthposition + startergap
+	            	startergap = 8.5
+					
+			
+
+
   Sbp = function(A_1, A_2, A_3, A_4, A_5, A_6, A_7)
     GetModel(BpRecive[A_1], Base* CFrame.Angles(A_2, A_3, A_4) + Vector3.new(A_5, A_6, A_7))
    end
  end  
 end
+end 
+end
+
 Sbp(1, -0, 0, -0, -97.999969482422, 0.20034790039063, -93.499877929688)
 Sbp(1, -0, 0, -0, -97.999969482422, 0.20034790039063, -94.499877929688)
 Sbp(6, -1.5707963705063, 1.5707963705063, 0, -97.999969482422, 11.600189208984, -96.100128173828)
