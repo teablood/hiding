@@ -4,6 +4,18 @@ local Player = "LocalPlayer"
 
 --_G.PreViewa = true
 
+if _G.gap then
+                	currentlettersize = 7
+                  	if cursorprint + Gap + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
+                 	else
+	         	
+	        	cursorprint = cursorprint + startergap
+	            	startergap = 8.5
+					
+					
+end 
+end
+
 local Remote = game.ReplicatedStorage.PlaceStructure.ClientPlacedStructure
 local Plr = game:GetService("Players").LocalPlayer
 local Check = true
