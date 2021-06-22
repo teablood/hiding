@@ -1,15 +1,17 @@
 --grey doggo
 local Player = "LocalPlayer"
-
+local currentlettersize = 0
+local startergap = 0
+local Gap = 0
 
 --_G.PreViewa = true
 
 if _G.gap then
                 	currentlettersize = 7
-                  	if cursorprint + Gap + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
+                  	if _G.widthposition + Gap + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
                  	else
 	         	
-	        	cursorprint = cursorprint + startergap
+	        	_G.widthposition = _G.widthposition + startergap
 	            	startergap = 8.5
 					
 					
