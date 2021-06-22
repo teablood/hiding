@@ -1,0 +1,123 @@
+--grey doggo
+local Player = "LocalPlayer"
+
+
+--_G.PreViewa = true
+
+local Remote = game.ReplicatedStorage.PlaceStructure.ClientPlacedStructure
+local Plr = game:GetService("Players").LocalPlayer
+local Check = true
+
+local BpRecive = { [1] = "Wall2Tall", [2] = "Door1", [3] = "Floor2", [4] = "Floor1Small", [5] = "Post", [6] = "Wedge10", [7] = "Wall3Tall", [8] = "Wall1Tall", [9] = "Wall1", [10] = "Wall1Short", [11] = "Wall2", [12] = "Wall2Short", [13] = "Wall1TallCorner", [14] = "Wall1Corner", [15] = "Wall1ShortCorner", [16] = "Wall1Thin", [17] = "Wall1TallThin", [18] = "Wall1ShortThin", [19] = "Wall2TallThin", [20] = "Wall2Thin", [21] = "Wall2ShortThin", [22] = "Wall2TallCorner", [23] = "Wall2Corner", [24] = "Wall2ShortCorner", [25] = "Wall3Thin", [26] = "Wall3TallThin", [27] = "Wall3Corner", [28] = "Wall3TallCorner", [29] = "Floor1Large", [30] = "Floor1", [31] = "Floor2Large", [32] = "Floor2Small", [33] = "Stair1", [34] = "Stair2", [35] = "Wedge1_Thin", [36] = "Wedge9_Thin", [37] = "Wedge4_Thin", [38] = "Wedge7_Thin", [39] = "Chair1", [40] = "Table1", [41] = "Table2", [42] = "Ladder1", [43] = "Cabinet1Thin", [44] = "Cabinet1", [45] = "Cabinet1CornerTight", [46] = "Cabinet1CornerWide", [47] = "CounterTop1Thin", [48] = "CounterTop1", [49] = "CounterTop1Sink", [50] = "Floor2Tiny", [51] = "Floor1Tiny", [52] = "Wedge1", [53] = "Wedge2", [54] = "Wedge3", [55] = "Wedge4", [56] = "Wedge8", [57] = "Wedge7", [58] = "Wedge6", [59] = "Wedge2_Thin", [60] = "Wedge3_Thin", [61] = "Wedge10_Thin", [62] = "Wedge9", [63] = "Wedge6_Thin", [64] = "Wedge8_Thin", [65] = "Wedge5", [66] = "Wedge5_Thin", [67] = "Wall3", [68] = "Door2", [69] = "Door3" }
+
+local MaxVal = 48
+local ManyC = 0
+
+local function ToFill(v)
+    ManyC = ManyC + 1
+    Remote:FireServer(v.ItemName.Value, v.PrimaryPart.CFrame, Plr, nil, v, true)
+    ManyC = ManyC - 2
+end
+
+local function SpawnBp(Name, cframe)
+    game:GetService("ReplicatedStorage").PlaceStructure.ClientPlacedBlueprint:FireServer(Name, cframe, Plr)
+    ManyC = ManyC + 1
+end
+
+local V1 = game.Workspace.PlayerModels.ChildAdded:connect(function(v)
+    if v:WaitForChild("Owner", 1) and v:WaitForChild("ItemName", 1) and v:WaitForChild("Type", 1) and v.Type.Value == "Blueprint" and v.Owner.Value == Plr then 
+        ToFill(v)
+    end
+end)
+
+local LDR = game.ReplicatedStorage.LoadSaveRequests
+local RS = LDR.RequestSave
+
+local MainTable = {}
+
+local function Start()
+    for i, v in pairs(game.Workspace.PlayerModels:GetChildren()) do
+        if v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v:FindFirstChild("Type") and v.Type.Value == "Blueprint" then
+            game.ReplicatedStorage.Interaction.DestroyStructure:FireServer(v)
+        end
+    end
+    RS.Parent = nil
+    local ToWait = 1
+    for i, v in pairs(MainTable) do
+        if ManyC > MaxVal then repeat wait() until ManyC < MaxVal end
+        SpawnBp(v.Name, v.CFrame)
+        if ToWait > 2 then wait() ToWait = 1 else ToWait = ToWait + 1 end
+    end
+    MainTable = {}
+    RS.Parent = LDR
+    wait(5)
+    V1:Disconnect()
+end
+
+
+local PreView = Instance.new("Model", game:GetService("Workspace").PlayerModels)
+local BP = game:FindFirstChild("BlueprintStructures", true):Clone()
+
+for i,v in pairs(BP:GetChildren()) do
+    for i, v in pairs(v:GetDescendants()) do if (v.ClassName == "Part" or v.ClassName == "WedgePart")  and v.Transparency == 0 then  v.BrickColor = BrickColor.Green() v.Transparency = 0.3 v.CanCollide = falsew end end
+    v.Model.PrimaryPart = v.Model.Main
+end
+
+local function GetModel(BPName, Cframe)
+    local Clone = BP:FindFirstChild(BPName).Model:Clone()
+    Clone.Parent = PreView
+    Clone:SetPrimaryPartCFrame(Cframe)
+    return Clone
+end
+
+_G.StopPreView = function()
+    PreView:Destroy()
+    BP:Destroy()
+end
+
+
+local Base
+for i, v in pairs(game.Workspace.Properties:GetChildren()) do
+    if v.Owner.Value == game.Players[Player] then
+        Base = v.OriginSquare.CFrame
+    end
+end
+
+--_G.heightposition = 0
+--_G.depthposition = 0
+--_G.widthposition = 0
+
+Base= Base * CFrame.new(_G.depthposition,_G.heightposition,_G.widthposition)
+
+local Sbp  
+Sbp = function(A_1, A_2, A_3, A_4, A_5, A_6, A_7)
+if _G.PreViewa == false then 
+ MainTable[#MainTable + 1] = {
+  ["Name"] = BpRecive[A_1],
+ ["CFrame"] = Base * CFrame.Angles(A_2, A_3, A_4) + Vector3.new(A_5, A_6, A_7)
+   }
+else
+  Sbp = function(A_1, A_2, A_3, A_4, A_5, A_6, A_7)
+    GetModel(BpRecive[A_1], Base* CFrame.Angles(A_2, A_3, A_4) + Vector3.new(A_5, A_6, A_7))
+   end
+ end  
+end
+Sbp(1, -0, 0, -0, -97.999969482422, 0.20034790039063, -93.499877929688)
+Sbp(1, -0, 0, -0, -97.999969482422, 0.20034790039063, -94.499877929688)
+Sbp(6, -1.5707963705063, 1.5707963705063, 0, -97.999969482422, 11.600189208984, -96.100128173828)
+Sbp(6, -1.5707963705063, 1.5707963705063, 0, -97.999969482422, 10.600189208984, -97.100128173828)
+Sbp(6, 1.5707963705063, 1.5707963705063, 0, -97.999969482422, 8.6001892089844, -96.899566650391)
+Sbp(6, 1.5707963705063, 1.5707963705063, 0, -97.999969482422, 9.6001892089844, -95.899566650391)
+Sbp(5, 3.1415927410126, -0, 1.5707963705063, -96.100006103516, 11.600189208984, -95.499847412109)
+Sbp(6, -1.5707963705063, 1.5707963705063, 0, -97.999969482422, 9.6001892089844, -98.100128173828)
+Sbp(6, -1.5707963705063, 1.5707963705063, 0, -97.999969482422, 8.6001892089844, -99.100128173828)
+Sbp(20, -1.5707963705063, 0, 1.5707963705063, -96.100219726563, 10.600189208984, -95.999938964844)
+Sbp(20, -1.5707963705063, 0, 1.5707963705063, -96.100219726563, 9.6001892089844, -96.999938964844)
+Sbp(20, -1.5707963705063, 0, 1.5707963705063, -96.100219726563, 8.6001892089844, -97.999938964844)
+Sbp(11, -0, 0, -0, -97.999938964844, 8.2005615234375, -94.499847412109)
+Sbp(11, -0, 0, -0, -97.999938964844, 8.2005615234375, -93.499847412109)
+
+Start()	
+wait(2)
+    PreView:Destroy()
+    BP:Destroy()
