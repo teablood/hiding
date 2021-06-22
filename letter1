@@ -1,8 +1,6 @@
 --grey doggo
 local Player = "LocalPlayer"
-local currentlettersize = 0
-local startergap = 0
-local Gap = 0
+
 
 --_G.PreViewa = true
 
@@ -91,7 +89,9 @@ end
 --_G.widthposition = 0
 
 Base= Base * CFrame.new(_G.depthposition,_G.heightposition,_G.widthposition)
-
+local currentlettersize = 0
+local startergap = 0
+local Gap = 0
 if _G.gap == true then
 
                 	currentlettersize = 7
