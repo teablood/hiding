@@ -5,8 +5,8 @@ local startergap = 0
 local Gap = 0
 
 --_G.PreViewa = true
+if _G.gap == true then
 
-if _G.gap then
                 	currentlettersize = 7
                   	if _G.widthposition + Gap + currentlettersize> 200 then send ("warning, cannot fit this letter in base!!!",4)
                  	else
