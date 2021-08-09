@@ -1,0 +1,42 @@
+local Amount = 1		-- Amount of drops to generate per .03 seconds
+local Distance = 50		-- Distance from player on the x and z axis
+local Height = 60		-- Distance from player on the y axis
+
+local RainDrop = Instance.new("Part")
+RainDrop.CanCollide = false
+RainDrop.BrickColor = BrickColor.new("White")
+RainDrop.FormFactor = "Custom"
+RainDrop.Shape = 0
+RainDrop.Size = Vector3.new(1, 1, 1)
+RainDrop.BottomSurface = "Smooth"
+RainDrop.TopSurface = "Smooth"
+RainDrop.Transparency = .2
+RainDrop.Reflectance = 0.3
+RainDrop.Name = "RainDrop"
+--local Mesh = Instance.new("BlockMesh")
+--Mesh.Scale = Vector3.new(.4, 2, .4)
+--Mesh.Parent = RainDrop
+
+while wait() do
+	for i = 1, Amount do
+		local drop = RainDrop:Clone()
+		drop.Parent = game.Workspace.CurrentCamera
+		drop.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame + Vector3.new(math.random(-Distance, Distance), Height ,math.random(-Distance, Distance))
+		game:GetService("Debris"):AddItem(drop, 3)
+		drop.Touched:connect(function(hit)
+			if hit.Name == "Splash" or hit.Name == "RainDrop" then
+				return 
+				else
+				local Sp = script.Splash:Clone()
+				Sp.Position = drop.Position + Vector3.new(0,0,0)
+				Sp.Parent = game.Workspace.CurrentCamera
+				wait(0.2)
+				Sp.Emitter:Emit(20)
+				drop:Destroy()
+				wait(.2)
+				Sp:Destroy()
+			end
+		end)
+			
+	end
+end
