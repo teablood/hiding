@@ -391,4 +391,4 @@ Execute.MouseButton1Down:connect(function()
 			C = FP
 		until FP.BrickColor.Name == string.sub(CurColor.Text, 9, #CurColor.Text - 1)
 	end
-
+end)
