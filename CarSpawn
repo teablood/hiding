@@ -348,7 +348,7 @@ end
 local Tool = Instance.new("Tool", game:GetService("Players").LocalPlayer.Backpack)
 Tool.Name = "Car Color Tool"
 Tool.RequiresHandle = false
-Tool.CanBeDropped = false
+Tool.CanBeDropped = true
 Tool.Unequipped:Connect(function()
 	Main.Visible = false
 end)
