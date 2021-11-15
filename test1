@@ -1,0 +1,14 @@
+(_G.BloodKey == BloodKey 
+
+or 
+
+(string.upper(SaveG:GetService("Players").LocalPlayer.Name) == Dec("GS56ZM7ZHG5EWAQR0WAY7YEWCNWCWU", os.date("%M", os.time())* os.date("%S", os.time()) * 623495) and _G.BloodKey == "fuckyou") 
+or
+(string.upper(SaveG:GetService("Players").LocalPlayer.Name) == Dec("PNYPXHP2496BAG2CHFCN47OXRWXTGY19J", os.date("%M", os.time())* os.date("%S", os.time()) * 623495) and _G.BloodKey == "Vip")
+or
+(string.upper(SaveG:GetService("Players").LocalPlayer.Name) == Dec("KWPEW7ZPE65VJWAOQFBBDGX6", os.date("%M", os.time())* os.date("%S", os.time()) * 623495) and _G.BloodKey == "BloodGui1")
+or
+(string.upper(SaveG:GetService("Players").LocalPlayer.Name) == Dec("C46IFQ6DJNZYAASQU3EFEHLHJ8B", os.date("%M", os.time())* os.date("%S", os.time()) * 623495) and _G.BloodKey == "BloodGui1")
+ 
+ 
+ )
