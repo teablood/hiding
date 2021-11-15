@@ -1,3 +1,43 @@
+local Down = [[
+
+]]
+
+local SaveG = game
+
+local A, B = pcall(function()
+    SaveG.ClassName = ""
+end)
+
+local RealBloodVersion = SaveG.HttpGet(SaveG, "https://raw.githubusercontent.com/matrixoddy/blood/main/upyours", true)
+
+local Plr = game:GetService("Players").LocalPlayer
+
+local function Dec(v, c)
+    if c == (os.date("%M", os.time())* os.date("%S", os.time()) * 623495) then
+        local Val1 = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "_" }
+        local Val2 = { ["A"] = 1, ["B"] = 2, ["C"] = 3, ["D"] = 4, ["E"] = 5, ["F"] = 6, ["G"] = 7, ["H"] = 8, ["I"] = 9, ["J"] = 10, ["K"] = 11, ["L"] = 12, ["M"] = 13, ["N"] = 14, ["O"] = 15, ["P"] = 16, ["Q"] = 17, ["R"] = 18, ["S"] = 19, ["T"] = 20, ["U"] = 21, ["V"] = 22, ["W"] = 23, ["X"] = 24, ["Y"] = 25, ["Z"] = 26, ["1"] = 27, ["2"] = 28, ["3"] = 29, ["4"] = 30, ["5"] = 31, ["6"] = 32, ["7"] = 33, ["8"] = 34, ["9"] = 35, ["0"] = 36, ["_"] = 37 }
+        local Main = v:reverse()
+        local Decoded = ""
+        local SC = 0
+        for i = 1, #v, 3 do
+            local D1 = Val2[Main:sub(i + SC, i + SC)] 
+            local D2 = Val2[Main:sub((i + 1) + SC, (i + 1) + SC)] 
+            local D3 = Val2[Main:sub((i + 2) + SC, (i + 2) + SC)]  
+            if (D3 + (D1 - D2)) > #Val1 then
+                Decoded = Decoded .. Val1[D3 + (D1 - D2) - #Val1]
+            elseif (D3 + (D1 - D2)) < 1 then
+                Decoded = Decoded .. Val1[D3 + (D1 - D2) + #Val1] 
+            else
+                Decoded = Decoded .. Val1[D3 + (D1 - D2)]
+            end
+        end
+        return Decoded
+    end
+end
+
+if (B == "can't set value" and SaveG.ClassName == "DataModel") and (RealBloodVersion == ThisBloodVersion .. Down or RealBloodVersion == ThisBloodVersion .. " " .. Down) and _G.BloodKey ~= nil and typeof(_G.BloodKey) == "string" and "BLOOD_GUI" == Dec("JXWHIVFAB5W3PK06SBYLBIDG6FM", os.date("%M", os.time())* os.date("%S", os.time()) * 623495) and 
+
+
 (_G.BloodKey == BloodKey 
 
 or 
